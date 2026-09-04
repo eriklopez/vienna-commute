@@ -1,0 +1,128 @@
+{
+  "commuteData": {
+    "origin": "Liesing",
+    "destination": "Wien Mitte",
+    "weather": {
+      "temp": 18,
+      "condition": "Partly cloudy",
+      "humidity": 42,
+      "windSpeed": 9,
+      "hourly": [
+        {
+          "time": "08:00",
+          "temp": 18
+        },
+        {
+          "time": "09:00",
+          "temp": 20
+        },
+        {
+          "time": "10:00",
+          "temp": 22
+        },
+        {
+          "time": "11:00",
+          "temp": 23
+        }
+      ],
+      "iconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/weather/sunny-cloudy.png"
+    },
+    "routes": [
+      {
+        "departTime": "08:30",
+        "arriveTime": "09:15",
+        "durationMinutes": 45,
+        "rank": 1,
+        "rankLabel": "Fastest",
+        "rankColor": "#1D9E75",
+        "changes": 1,
+        "legs": [
+          {
+            "type": "transit",
+            "line": "S7",
+            "color": "#0F6E56",
+            "modeIconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/train.png"
+          },
+          {
+            "type": "walk",
+            "minutes": 6,
+            "iconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/walk.png"
+          },
+          {
+            "type": "transit",
+            "line": "71",
+            "color": "#A32D2D",
+            "modeIconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/tram.png"
+          }
+        ]
+      },
+      {
+        "departTime": "08:40",
+        "arriveTime": "09:20",
+        "durationMinutes": 40,
+        "rank": 2,
+        "rankLabel": "Good balance",
+        "rankColor": "#3378C7",
+        "changes": 2,
+        "legs": [
+          {
+            "type": "transit",
+            "line": "74A",
+            "color": "#185FA5",
+            "modeIconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/bus.png"
+          },
+          {
+            "type": "walk",
+            "minutes": 5,
+            "iconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/walk.png"
+          },
+          {
+            "type": "transit",
+            "line": "U3",
+            "color": "#854F0B",
+            "modeIconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/metro.png"
+          },
+          {
+            "type": "walk",
+            "minutes": 2,
+            "iconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/walk.png"
+          },
+          {
+            "type": "transit",
+            "line": "U4",
+            "color": "#3B6D11",
+            "modeIconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/metro.png"
+          }
+        ]
+      },
+      {
+        "departTime": "08:50",
+        "arriveTime": "09:30",
+        "durationMinutes": 40,
+        "rank": 3,
+        "rankLabel": "Fewer changes",
+        "rankColor": "#D97706",
+        "changes": 1,
+        "legs": [
+          {
+            "type": "transit",
+            "line": "18",
+            "color": "#A32D2D",
+            "modeIconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/tram.png"
+          },
+          {
+            "type": "walk",
+            "minutes": 8,
+            "iconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/walk.png"
+          },
+          {
+            "type": "transit",
+            "line": "U2",
+            "color": "#534AB7",
+            "modeIconUrl": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/modes/metro.png"
+          }
+        ]
+      }
+    ]
+  }
+}

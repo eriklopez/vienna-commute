@@ -1,0 +1,412 @@
+{
+  "type": "APL",
+  "version": "2023.3",
+  "theme": "dark",
+  "import": [],
+  "resources": [
+    {
+      "colors": {
+        "colorBg": "#E2EAFB",
+        "colorCard": "#FEFEFE",
+        "colorCardBorder": "#3A3A3A",
+        "colorTextPrimary": "#3D3D3D",
+        "colorTextSecondary": "#6E6E6E",
+        "colorRank1": "#1D9E75",
+        "colorRank2": "#3378C7",
+        "colorRank3": "#D97706",
+        "colorRankText": "#F4F2FD",
+        "weatherBgDark": "#123A6B",
+        "weatherBgLight": "#5ed4fb",
+        "weatherTextPrimary": "#FFFFFF",
+        "weatherTextSecondary": "#FFFFFF"
+      }
+    }
+  ],
+  "layouts": {
+    "LegItem": {
+      "parameters": [
+        "legData",
+        "legIndex"
+      ],
+      "item": {
+        "type": "Container",
+        "direction": "row",
+        "alignItems": "center",
+        "items": [
+          {
+            "when": "${legIndex > 0}",
+            "type": "Text",
+            "text": "···",
+            "fontSize": "36dp",
+            "color": "@colorTextSecondary",
+            "paddingLeft": "4dp",
+            "paddingRight": "4dp"
+          },
+          {
+            "when": "${legData.type == 'walk'}",
+            "type": "Container",
+            "direction": "row",
+            "alignItems": "center",
+            "paddingLeft": "6dp",
+            "paddingRight": "6dp",
+            "items": [
+              {
+                "type": "Image",
+                "source": "${legData.iconUrl}",
+                "width": "64dp",
+                "height": "64dp",
+                "scale": "best-fit"
+              },
+              {
+                "type": "Text",
+                "text": "${legData.minutes}",
+                "fontSize": "24dp",
+                "fontWeight": "700",
+                "color": "@colorTextSecondary",
+                "paddingLeft": "4dp"
+              }
+            ]
+          },
+          {
+            "when": "${legData.type == 'transit'}",
+            "type": "Container",
+            "direction": "row",
+            "alignItems": "center",
+            "items": [
+              {
+                "type": "Image",
+                "source": "${legData.modeIconUrl}",
+                "width": "64dp",
+                "height": "64dp",
+                "scale": "best-fit"
+              },
+              {
+                "type": "Frame",
+                "background": "${legData.color}",
+                "borderRadius": "6dp",
+                "paddingLeft": "10dp",
+                "paddingRight": "10dp",
+                "paddingTop": "4dp",
+                "paddingBottom": "4dp",
+                "spacing": "4dp",
+                "item": {
+                  "type": "Text",
+                  "text": "${legData.line}",
+                  "color": "#FFFFFF",
+                  "fontSize": "36dp",
+                  "fontWeight": "700"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "RankBadge": {
+      "parameters": [
+        "rankNumber",
+        "rankLabel",
+        "rankColor"
+      ],
+      "item": {
+        "type": "Container",
+        "direction": "row",
+        "alignItems": "center",
+        "items": [
+          {
+            "type": "Frame",
+            "background": "${rankColor}",
+            "borderRadius": "11dp",
+            "width": "32dp",
+            "height": "32dp",
+            "item": {
+              "type": "Text",
+              "text": "${rankNumber}",
+              "fontSize": "24dp",
+              "fontWeight": "700",
+              "color": "@colorRankText",
+              "textAlign": "center",
+              "textAlignVertical": "center",
+              "width": "100%",
+              "height": "100%"
+            }
+          },
+          {
+            "type": "Frame",
+            "background": "${rankColor}",
+            "borderRadius": "8dp",
+            "paddingLeft": "10dp",
+            "paddingRight": "10dp",
+            "paddingTop": "4dp",
+            "paddingBottom": "4dp",
+            "spacing": "6dp",
+            "item": {
+              "type": "Text",
+              "text": "${rankLabel}",
+              "fontSize": "20dp",
+              "fontWeight": "700",
+              "color": "@colorRankText"
+            }
+          }
+        ]
+      }
+    },
+    "RouteCard": {
+      "parameters": [
+        "routeData"
+      ],
+      "item": {
+        "type": "Frame",
+        "background": "@colorCard",
+        "borderColor": "@colorCardBorder",
+        "borderWidth": "1dp",
+        "borderRadius": "14dp",
+        "padding": "16dp",
+        "item": {
+          "type": "Container",
+          "direction": "column",
+          "items": [
+            {
+              "type": "RankBadge",
+              "rankNumber": "${routeData.rank}",
+              "rankLabel": "${routeData.rankLabel}",
+              "rankColor": "${routeData.rankColor}",
+              "when": "${routeData.rankLabel != ''}"
+            },
+            {
+              "type": "Container",
+              "direction": "row",
+              "alignItems": "center",
+              "paddingTop": "8dp",
+              "items": [
+                {
+                  "type": "Text",
+                  "text": "${routeData.departTime}",
+                  "fontSize": "32dp",
+                  "fontWeight": "700",
+                  "color": "@colorTextPrimary"
+                },
+                {
+                  "type": "Text",
+                  "text": "",
+                  "grow": 1
+                },
+                {
+                  "type": "Container",
+                  "direction": "column",
+                  "alignItems": "end",
+                  "items": [
+                    {
+                      "type": "Text",
+                      "text": "${routeData.arriveTime}",
+                      "fontSize": "20dp",
+                      "fontWeight": "700",
+                      "color": "@colorTextPrimary"
+                    },
+                    {
+                      "type": "Text",
+                      "text": "${routeData.durationMinutes} min total",
+                      "fontSize": "13dp",
+                      "color": "@colorTextSecondary"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "direction": "row",
+              "alignItems": "center",
+              "width": "100%",
+              "paddingTop": "12dp",
+              "data": "${routeData.legs}",
+              "items": [
+                {
+                  "type": "LegItem",
+                  "legData": "${data}",
+                  "legIndex": "${index}"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "mainTemplate": {
+    "parameters": [
+      "payload"
+    ],
+    "items": [
+      {
+        "type": "Frame",
+        "width": "100vw",
+        "height": "100vh",
+        "background": "@colorBg",
+        "item": {
+          "type": "Container",
+          "width": "100%",
+          "height": "100%",
+          "direction": "row",
+          "items": [
+            {
+              "type": "Frame",
+              "width": "25vw",
+              "height": "100vh",
+              "background": {
+                "type": "linear",
+                "angle": 180,
+                "colorRange": [
+                  "@weatherBgDark",
+                  "@weatherBgDark",
+                  "@weatherBgLight",
+                  "@weatherBgLight"
+                ]
+              },
+              "item": {
+                "type": "Container",
+                "width": "100%",
+                "height": "100%",
+                "direction": "column",
+                "padding": "28dp",
+                "items": [
+                  {
+                    "type": "Image",
+                    "source": "${payload.commuteData.weather.iconUrl}",
+                    "width": "128dp",
+                    "height": "128dp",
+                    "scale": "best-fit"
+                  },
+                  {
+                    "type": "Text",
+                    "text": "${payload.commuteData.weather.temp}°",
+                    "fontSize": "128dp",
+                    "fontWeight": "700",
+                    "color": "@weatherTextPrimary",
+                    "paddingTop": "8dp"
+                  },
+                  {
+                    "type": "Text",
+                    "text": "${payload.commuteData.weather.condition}",
+                    "fontSize": "24dp",
+                    "color": "@weatherTextSecondary",
+                    "paddingBottom": "16dp"
+                  },
+                  {
+                    "type": "Container",
+                    "direction": "row",
+                    "paddingBottom": "16dp",
+                    "items": [
+                      {
+                        "type": "Text",
+                        "text": "${payload.commuteData.weather.humidity}% humidity",
+                        "fontSize": "18dp",
+                        "color": "@weatherTextSecondary",
+                        "grow": 1
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.commuteData.weather.windSpeed} km/h wind",
+                        "fontSize": "18dp",
+                        "color": "@weatherTextSecondary"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Sequence",
+                    "width": "100%",
+                    "grow": 1,
+                    "data": "${payload.commuteData.weather.hourly}",
+                    "items": [
+                      {
+                        "type": "Container",
+                        "direction": "row",
+                        "paddingBottom": "8dp",
+                        "items": [
+                          {
+                            "type": "Text",
+                            "text": "${data.time}",
+                            "fontSize": "24dp",
+                            "color": "@weatherTextSecondary",
+                            "grow": 1
+                          },
+                          {
+                            "type": "Text",
+                            "text": "${data.temp}°",
+                            "fontSize": "24dp",
+                            "color": "@weatherTextPrimary"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Image",
+                    "source": "https://raw.githubusercontent.com/eriklopez/vienna-commute/main/assets/skyline.png",
+                    "width": "100%",
+                    "height": "400dp",
+                    "padding": 0,
+                    "scale": "best-fit",
+                    "align": "bottom"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "Container",
+              "width": "75vw",
+              "height": "100vh",
+              "direction": "column",
+              "padding": "28dp",
+              "items": [
+                {
+                  "type": "Container",
+                  "direction": "row",
+                  "alignItems": "center",
+                  "paddingBottom": "18dp",
+                  "items": [
+                    {
+                      "type": "Text",
+                      "text": "${payload.commuteData.origin}",
+                      "fontSize": "20dp",
+                      "fontWeight": "600",
+                      "color": "@colorTextPrimary"
+                    },
+                    {
+                      "type": "Text",
+                      "text": "→",
+                      "fontSize": "18dp",
+                      "color": "@colorTextSecondary",
+                      "paddingLeft": "8dp",
+                      "paddingRight": "8dp"
+                    },
+                    {
+                      "type": "Text",
+                      "text": "${payload.commuteData.destination}",
+                      "fontSize": "20dp",
+                      "fontWeight": "600",
+                      "color": "@colorTextPrimary"
+                    }
+                  ]
+                },
+                {
+                  "type": "Sequence",
+                  "width": "100%",
+                  "grow": 1,
+                  "data": "${payload.commuteData.routes}",
+                  "items": [
+                    {
+                      "type": "RouteCard",
+                      "routeData": "${data}",
+                      "paddingBottom": "14dp"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
